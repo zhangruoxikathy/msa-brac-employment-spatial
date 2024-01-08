@@ -1,5 +1,5 @@
 # msa-brac-employment-spatial
-# Exploring Metropolitan Statistical Areas and Employment, with Spatial Visualizations
+# Exploring Metropolitan Statistical Areas and Employment, with Spatial Visualizations, Shiny App Web Page Example
 To read more about what an MSA is, see [this link](https://www.census.gov/programs-surveys/metro-micro/about.html) to the US Census Bureau. 
 
 # Files
@@ -98,3 +98,14 @@ Then plot the states with black edges and a white fill. Add to that figure the M
 
 Lastly, instead of dropping Alaska, Hawaii, and Puerto Rico, create a figure that has one large subplot for the continental US, and three smaller subplots, one each for those four locations.  Correctly map the MSA BRAC values onto all four subplots. Save it as hw3q2_allstates.png.
 
+## 8. Interactive Shiny App
+We will then creat a figure using the above data inside an interactive Shiny app. 
+
+1. Set up a basic UI for the page. Create a title panel and/or a side bar, and include some reference material.
+2. Recreate the line plot 'plot1.png', only instead of showing three lines grouped by the direct effect from BRAC, split it into four lines based on the military share of employment (top quantile, middle quantile, lowest quantile, and zero). 
+    - Create a UI element that lets the user select one of the three years--2005, 2006, 2007, and shows the unemployment rate for those 12 months.
+    - Add a text output that indicates to the user whether the selected year is a BRAC year (2005) or not a BRAC year (2006, 2007).
+    - Add a UI element that lets the user select military share or the manufacturing share of employment, then automatically update the figure to show the quantiles (plus a zero group) for that measure.
+4. Add any appropriate titles, labels, and formatting to your figure.
+
+Finally, a screen shot of our Shiny app running in the web browser is attached in the 'ShinyApp' folder, named 'web_page.png'.
