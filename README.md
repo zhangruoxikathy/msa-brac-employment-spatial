@@ -2,13 +2,18 @@
 # Exploring Metropolitan Statistical Areas and Employment
 
 # Files
-- .gitignore file excludes all shapefile folders and any zip files from being committed to the repo. 
 
-## 1. Downloading data
-The first challenge researchers often face is the availability of desired data; it might exist but at the wrong frequency or level of geographic analysis, it might not cover desired time spans or geographies, or it might not exist at all. This can be surprisingly common, and it is dangerous to begin work on a project under the assumption data will be available.
-
-Once you establish that your data exists, the second issue becomes retrieving it, some of which was covered last quarter when we went over automated data retrieval and web scraping. The first step in this assignment is to interface through your web browser with two sites to retrieve US data at the county and MSA (Metropolitan Statistical Area) level. Note that sites like these can be great sources of data for your final project, so take a minute to browse the data available for inspiration. For full credit you should follow these steps exactly.
-
+### Data Sources and Descriptions ('data' folder)
+#### ssamatab.xlsx: Monthly statistics on the levels of the labor force, employment, and unemployment, along with the unemployment rate, for all MSAs in the US, from 1990 to 2023.
+Bureau of Labor and Statistics (BLS) website: https://www.bls.gov/lau/metrossa.htm. At the bottom under "Downloadable Data Files" select the ZIP version of Table 1. The extracted file is named ssamatab.xlsx by default.
+#### geocorr2018_2327800015.csv: County-MSAs linkage file for crosswalk.
+Missouri Census Data Center Geographic Correspondence Engine (MABLE Geocorr) at: https://mcdc.missouri.edu/applications/geocorr2018.html. 
+  * In the top window select all US states by holding shift and clicking at the bottom
+  * In the left window select "County"
+  * In the right window select "Core Based Statistical Area (CBSA)"
+  * Leave all other selections at their defaults and click "Run request"
+  * Save the CSV document generated at the bottom of the next page, that begins with "geocorr2018_"
+#### Table.csv: Annual county employment levels for three years, split by total jobs, manufacturing jobs, and military jobs.
 To begin, go to the following Bureau of Economic Analysis (BEA) website: https://www.bea.gov/itable/regional-gdp-and-personal-income. Click on:
   * "Interactive Data Tables" (orange bar)
   * "Personal income and employment by county and metropolitan area"
@@ -19,15 +24,18 @@ To begin, go to the following Bureau of Economic Analysis (BEA) website: https:/
   * In the "Statistic" window, select "Total employment (number of jobs)", "Manufacturing", and "Military" (hold ctrl to select multiple items)
   * Select the years 2005, 2006, and 2007
   * Click "Download" and select "CSV". The resulting file will be named Table.csv
- 
-Second, go to this Bureau of Labor and Statistics (BLS) website: https://www.bls.gov/lau/metrossa.htm. At the bottom under "Downloadable Data Files" select the ZIP version of Table 1. The extracted file is named ssamatab.xlsx by default (you can extract it manually, though it is not hard to do with Python).
+#### hw2_data.csv: BRAC 2005 Closure and Realignment Impacts by Economic Area, cleaned.
 
-And finally, go to the Missouri Census Data Center Geographic Correspondence Engine (MABLE Geocorr) at: https://mcdc.missouri.edu/applications/geocorr2018.html. 
-  * In the top window select all US states by holding shift and clicking at the bottom
-  * In the left window select "County"
-  * In the right window select "Core Based Statistical Area (CBSA)"
-  * Leave all other selections at their defaults and click "Run request"
-  * Save the CSV document generated at the bottom of the next page, that begins with "geocorr2018_"
+### Output Images ('image' folder)
+
+### Miscellaneous
+#### .gitignore file excludes all shapefile folders and any zip files from being committed to the repo.
+
+## 1. Downloading data
+The first challenge researchers often face is the availability of desired data; it might exist but at the wrong frequency or level of geographic analysis, it might not cover desired time spans or geographies, or it might not exist at all. This can be surprisingly common, and it is dangerous to begin work on a project under the assumption data will be available.
+
+Once you establish that your data exists, the second issue becomes retrieving it, some of which was covered last quarter when we went over automated data retrieval and web scraping. The first step in this assignment is to interface through your web browser with two sites to retrieve US data at the county and MSA (Metropolitan Statistical Area) level. Note that sites like these can be great sources of data for your final project, so take a minute to browse the data available for inspiration. For full credit you should follow these steps exactly.
+
   
 ## 2. Preparing the county-level BEA data
 The file Table.csv shows annual county employment levels for three years, split by total jobs, manufacturing jobs, and military jobs. Explore the file, then load it in as a dataframe, cleaning it up and reshaping it to long (tidy) format. Recall that in this format, each row should be uniquely identified by a place and a time. The end result should have five columns (county, year, manufacturing, military, total) and 9,354 rows.
