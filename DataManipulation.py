@@ -13,11 +13,11 @@ import numpy as np
 import os
 
 
-# %% Section 1 Functions
-
 PATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
-    r'\\homework-1-zhangruoxikathy-1'
+    r'\\msa-brac-employment-spatial'
 
+
+# %% Section 1 Functions
 
 def load_file(fname, ftype, skiprows, skipfooter, na_values, remains, yr_str):
     """Read csv and excel files with necessary cleaning steps."""

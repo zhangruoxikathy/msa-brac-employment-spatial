@@ -1,9 +1,11 @@
-# PPHA 30538 Python2
-# Fall 2023
-# Homework 3
+# Visualizations
 
-# Kathy Zhang
-# zhangruoxikathy
+###############################################################################
+"""
+In this .py file, we will visualize per MSA BRAC 2005 Closure and Realignment
+ Impacts data by year, and produce spatial visualizations.
+"""
+###############################################################################
 
 # import packages
 import os
@@ -17,19 +19,14 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 PATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
-    r'\\homework-3-zhangruoxikathy-1'
+    r'\\msa-brac-employment-spatial'
+IMAGEPATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
+    r'\\msa-brac-employment-spatial\\ImagesOutput'
+
 
 # %% Section 1 Line Plots
 
 # %%% Sub-Section 1a
-# 1a) Go back to homework 1, and copy/paste your code for loading the BLS data
-# (ssamatab1.xlsx) into this assignment. Modify the code to work here and to
-# keep the "Area FIPS Code" column. Pause to reflect on this process - was it
-# easy to copy all of your code over? Was the way you organized it in HW1
-# condusive to reuse and making this small change, or did it require extra
-# work? Then, filter the data so only observations for 2005 remain, and create
-# a column of datetime objects.
-
 
 def load_file(fname, ftype, skiprows, skipfooter, na_values, remains):
     """Read csv and excel files with necessary cleaning steps."""
@@ -53,10 +50,6 @@ def load_file(fname, ftype, skiprows, skipfooter, na_values, remains):
     dfname.columns = dfname.columns.str.lower()
 
     return dfname
-
-# It was quite easy to copy the code over because I actually made this loading
-# step as thorough as possble, feeding inputs such as keeping only required
-# columns, removing na values and distinguish between excel and csv files.
 
 
 def modify_file(fname, year):
@@ -84,17 +77,7 @@ msa_bls_new = modify_file(msa_bls, 2005)
 
 # %%% Sub-Section 1b
 
-# 1b) Load the final csv document from homework 2 provided in this repo - I
-# have added a column to it listing FIPS codes for (most of) the MSAs. As we
-# saw in previous assignments, merging on strings, while sometimes necessary,
-# can also be a pain to get right! Fortunately, a lot of geographies do come
-# with codes for matching, which we will use here. Merge this data with the
-# data created in 1a using the FIPS codes, so each row is unique by MSA, and
-# you've added one new column - 'direct' to the four from the first part.
-# Discard the other columns from the BRAC table (the direct column sums all of
-# the other impact columns into one value).
-
-# load brac file, with the updated version on canvas
+# load brac file
 brac = load_file('hw2_data.csv', 'csv', [], 0, '-', ['direct', 'msa_fips'])
 
 
@@ -117,24 +100,6 @@ brac_new, merged_file = group_and_merge(brac, 'area fips code')
 
 
 # %%% Sub-Section 1c
-# 1c) Create a figure to explore this data using MatPlotLib, Seaborn, and/or
-# Pandas. The goal is to create a line graph that has the date on the x-axis,
-# and the unemployment rate on the y-axis.
-
-# The graph should have three lines; one for MSAs that had net gains from the
-# 2005 BRAC round, one for MSAs that had net losses, and one for MSAs with no
-# gains or losses. Aggregate the MSA-level data into these three groups using
-# the mean value. Make sure your plot clearly displays the data, including
-# using good axis labels, titles, colors and a legend.
-# Add two vertical lines, one in May and one in September. Create annotations
-# on the plot for each line, the first saying "BRAC start" and the second
-# saying "BRAC end". Save your figure as hw3q1.png and commit it with your
-# code.
-# Finally, imagine that you are now trying to apply this analysis to other BRAC
-# rounds (there were in fact four others in 1988, 1991, 1993, and 1995). We
-# will not be working with this data, but you should work on generalizing your
-# function so that it could generate the same plot for data from other years,
-# assuming that data was in the same format as the 2005 data.
 
 def plot_gains_losses(file, year):
     """Graph the gains, losses, no gains losses curves for a given year."""
@@ -180,7 +145,7 @@ def plot_gains_losses(file, year):
                  f' {year}')
 
     # save and show graph
-    hw3q1_plot = os.path.join(PATH, "hw3q1.png")
+    hw3q1_plot = os.path.join(IMAGEPATH, "plot1.png")
     fig.savefig(hw3q1_plot)
     plt.show()
 
@@ -192,23 +157,6 @@ plot_gains_losses(merged_file, 2005)
 # %% Section 2 Choropleth
 
 # %%% Sub-Section 2a spatial mapping to show the direct affects of BRAC in US
-
-# Merge your BRAC dataframe from part 1b above (not the version merged with
-# the BLS data) into the MSA shapefile. Unfortunately the shapefiles are using
-# some new FIPS codes, while our BLS and BRAC data have old ones! Use the old
-# _new dictionary below that I assembled for to update the BRAC msa fips codes.
-# Once you apply it, all of the observations from the BRAC data should merge
-# Keep only the MSAs in your geodataframe that have data from the BRAC direct
-# affects.
-
-# From the state geodataframe, drop all places by NAME that are not part of the
-# continental US (Alaska, Hawaii, territories except Washington DC - feel free
-# to ask if you aren't sure which places in this list are territories, but all
-# of them will show up in a choropleth as disconnected from the mainland).
-# Then plot the states with black edges and a white fill. Add to that figure
-# the MSAs that have BRAC effects, colored by how positive or negative the
-# effect is. Clean up your figure, label it appropriately, and save it as
-# hw3q2.png and commit it with your code.
 
 def read_shp_file(folder, shp_file):
     """Read shp file."""
@@ -283,7 +231,7 @@ def plot_continentalUS(gdf, edge, column_to_plot):
     ax.axis('off');
 
     # save as png to local
-    hw3q2_plot = os.path.join(PATH, "hw3q2.png")
+    hw3q2_plot = os.path.join(IMAGEPATH, "plot2.png")
     fig.savefig(hw3q2_plot)
 
 
@@ -308,11 +256,6 @@ plot_continentalUS(gdf_msa_conti, gdf_state_conti, 'direct')
 
 
 # %%% Sub-Section Extra credit question
-
-# If, instead of dropping Alaska, Hawaii, and Puerto Rico, you create a figure
-# that has one large subplot for the continental US, and three smaller
-# subplots, one each for those four locations. Correctly map the MSA BRAC
-# values onto all four subplots.
 
 def get_single_state_msadata(state_list, state_df, gdf_msa_df):
     """Take a list of states to produce single state edge and msa brac data."""
@@ -398,7 +341,7 @@ def plot_all_continents_territories():
     ax4.set_title('PR');
 
     # save as png to local
-    hw3q2extracredit_plot = os.path.join(PATH, "hw3q2_extracredit.png")
+    hw3q2extracredit_plot = os.path.join(IMAGEPATH, "plot3_allstates.png")
     fig.savefig(hw3q2extracredit_plot)
 
 
