@@ -1,9 +1,11 @@
-# PPHA 30538 Python2
-# Fall 2023
-# Homework 1
+# Data Manipulation
 
-# Kathy Zhang
-# zhangruoxikathy
+###############################################################################
+"""
+In this .py file, we will clean and merge county-level BEA data and
+ MSA-level BLS with light analysis during the BRAC period in the end.
+"""
+###############################################################################
 
 # import packages
 import pandas as pd
@@ -11,7 +13,7 @@ import numpy as np
 import os
 
 
-# %% Section 1 Functions created and PATH
+# %% Section 1 Functions
 
 PATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
     r'\\homework-1-zhangruoxikathy-1'
@@ -176,7 +178,6 @@ clean_names(crosswalk, 'msa', [' Metropolitan Statistical Area',
 
 # 5. Merging
 
-# All the data fixing are shown in previous questions
 # The two merged dfs are investigated types and _merge using explore_merge func
 
 # Inner merge bea and crosswalk first
