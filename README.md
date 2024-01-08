@@ -52,7 +52,7 @@ Remember everything we've talked about regarding writing good code, using functi
   * One file named homework1.py with your code.  Please use this exact name as it makes our internal processing easier.  Also include your name as it appears on Canvas in a comment at the top.
   * The three datasets you download: Table.csv, ssamatab.xlsx, and geocorr2018_xxxx.csv
 
-## Data Visualization
+## 7. Data Visualization
 ## Part 1: Line Plot
 
 __1a)__ Using BLS data (ssamatab1.xlsx), modify the code to work here and to keep the "Area FIPS Code" column. Then, filter the data so only observations for 2005 remain, and create acolumn of datetime objects.
