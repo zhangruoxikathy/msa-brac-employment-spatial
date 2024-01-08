@@ -4,7 +4,7 @@ To read more about what an MSA is, see [this link](https://www.census.gov/progra
 
 # Files
 
-### Data Sources and Descriptions ('data' folder)
+### - Data Sources and Descriptions ('data' folder)
 #### 1. ssamatab.xlsx: Monthly statistics on the levels of the labor force, employment, and unemployment, along with the unemployment rate, for all MSAs in the US, from 1990 to 2023.
 Bureau of Labor and Statistics (BLS) website: https://www.bls.gov/lau/metrossa.htm. At the bottom under "Downloadable Data Files" select the ZIP version of Table 1. The extracted file is named ssamatab.xlsx by default.
 #### 2. geocorr2018_2327800015.csv: County-MSAs linkage file for crosswalk.
@@ -30,9 +30,16 @@ To begin, go to the following Bureau of Economic Analysis (BEA) website: https:/
 MSA zip shapefile directly from: https://www2.census.gov/geo/tiger/TIGER2019/CBSA/tl_2019_us_cbsa.zip,
 and the state zip shapefiles directly from: https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_5m.zip
 
-### Output Images ('image' folder)
+### - Codes
+#### 1. Data Manipulation: Clean and merge county-level BEA data and MSA-level BLS with light analysis during the BRAC period in the end.
+#### 2. Visualizations: Visualizes per MSA BRAC 2005 Closure and Realignment Impacts data by year, and produce spatial visualizations, outputs to 'ImagesOutput' folder
 
-### Miscellaneous
+### - Output Images ('ImagesOutput' folder)
+#### 1. plot1: Line plot that shows the average unemplotment rate by BRAC direct changes over time in 2005
+#### 2. plot2: Spatial map taht plots non-zero direct effects of BRAC, by continental USA MSA
+#### 3. plot3_allstates: Spatial map that plots non-zero direct effects of BRAC, by continental and territory USA MSA
+ 
+### - Miscellaneous
 #### .gitignore file excludes all shapefile folders and any zip files from being committed to the repo.
 
 
