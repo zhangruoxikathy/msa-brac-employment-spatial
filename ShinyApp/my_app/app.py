@@ -1,9 +1,4 @@
-# PPHA 30538 Python2
-# Fall 2023
-# Homework 4
-
-# Kathy Zhang
-# zhangruoxikathy
+# Interactive Shiny App
 
 # import packages
 from shiny import App, render, ui, reactive
@@ -15,7 +10,10 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 
-PATH = r'C:\Users\zhang\GitHub\homework-4-zhangruoxikathy-1'
+PATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
+    r'\\msa-brac-employment-spatial\\ShinyApp'
+DATAPATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
+    r'\\msa-brac-employment-spatial\\Data'
 
 
 # prepare data for shiny
@@ -24,13 +22,13 @@ def load_file(fname, ftype, skiprows, skipfooter, na_values, remains, yr_str):
     """Includes skip rows/footers, identify nas, keep required columns,
     remove spaces in column names, modify year column."""
     if ftype == "csv":
-        dfname = pd.read_csv(os.path.join(PATH, fname),
+        dfname = pd.read_csv(os.path.join(DATAPATH, fname),
                              skiprows=skiprows,
                              skipfooter=skipfooter,
                              engine='python',
                              na_values=na_values)
     elif ftype == "excel":
-        dfname = pd.read_excel(os.path.join(PATH, fname),
+        dfname = pd.read_excel(os.path.join(DATAPATH, fname),
                                skiprows=skiprows,
                                skipfooter=skipfooter,
                                na_values=na_values)

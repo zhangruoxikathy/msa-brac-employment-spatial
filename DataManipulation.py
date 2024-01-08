@@ -15,7 +15,8 @@ import os
 
 PATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
     r'\\msa-brac-employment-spatial'
-
+DATAPATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
+    r'\\msa-brac-employment-spatial\\Data'
 
 # %% Section 1 Functions
 
@@ -24,13 +25,13 @@ def load_file(fname, ftype, skiprows, skipfooter, na_values, remains, yr_str):
     """Includes skip rows, footers, identify n/as, keep required columns,
     remove spaces in column names, modify year column."""
     if ftype == "csv":
-        dfname = pd.read_csv(os.path.join(PATH, fname),
+        dfname = pd.read_csv(os.path.join(DATAPATH, fname),
                              skiprows=skiprows,
                              skipfooter=skipfooter,
                              engine='python',
                              na_values=na_values)
     elif ftype == "excel":
-        dfname = pd.read_excel(os.path.join(PATH, fname),
+        dfname = pd.read_excel(os.path.join(DATAPATH, fname),
                                skiprows=skiprows,
                                skipfooter=skipfooter,
                                na_values=na_values)

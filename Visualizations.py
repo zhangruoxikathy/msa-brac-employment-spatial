@@ -20,6 +20,8 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 PATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
     r'\\msa-brac-employment-spatial'
+DATAPATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
+    r'\\msa-brac-employment-spatial\\Data'
 IMAGEPATH = r'C:\\Users\\zhang\\OneDrive\\Documents\\GitHub'\
     r'\\msa-brac-employment-spatial\\ImagesOutput'
 
@@ -33,13 +35,13 @@ def load_file(fname, ftype, skiprows, skipfooter, na_values, remains):
     """Includes skip rows, footers, identify n/as, keep required columns,
     remove spaces in column names, modify year column."""
     if ftype == "csv":
-        dfname = pd.read_csv(os.path.join(PATH, fname),
+        dfname = pd.read_csv(os.path.join(DATAPATH, fname),
                              skiprows=skiprows,
                              skipfooter=skipfooter,
                              engine='python',
                              na_values=na_values)
     elif ftype == "excel":
-        dfname = pd.read_excel(os.path.join(PATH, fname),
+        dfname = pd.read_excel(os.path.join(DATAPATH, fname),
                                skiprows=skiprows,
                                skipfooter=skipfooter,
                                na_values=na_values)
@@ -145,8 +147,8 @@ def plot_gains_losses(file, year):
                  f' {year}')
 
     # save and show graph
-    hw3q1_plot = os.path.join(IMAGEPATH, "plot1.png")
-    fig.savefig(hw3q1_plot)
+    plot1 = os.path.join(IMAGEPATH, "plot1.png")
+    fig.savefig(plot1)
     plt.show()
 
 
@@ -231,8 +233,8 @@ def plot_continentalUS(gdf, edge, column_to_plot):
     ax.axis('off');
 
     # save as png to local
-    hw3q2_plot = os.path.join(IMAGEPATH, "plot2.png")
-    fig.savefig(hw3q2_plot)
+    plot2 = os.path.join(IMAGEPATH, "plot2.png")
+    fig.savefig(plot2)
 
 
 # Running functions for Q2
@@ -341,8 +343,8 @@ def plot_all_continents_territories():
     ax4.set_title('PR');
 
     # save as png to local
-    hw3q2extracredit_plot = os.path.join(IMAGEPATH, "plot3_allstates.png")
-    fig.savefig(hw3q2extracredit_plot)
+    plot3_allstates = os.path.join(IMAGEPATH, "plot3_allstates.png")
+    fig.savefig(plot3_allstates)
 
 
 # get only modified state and msa brac data for territory states
