@@ -30,8 +30,15 @@ To begin, go to the following Bureau of Economic Analysis (BEA) website: https:/
 MSA zip shapefile directly from: https://www2.census.gov/geo/tiger/TIGER2019/CBSA/tl_2019_us_cbsa.zip,
 and the state zip shapefiles directly from: https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_5m.zip
 
-### Output Images ('image' folder)
+### Codes
+#### 1. Data Manipulation: Clean and merge county-level BEA data and MSA-level BLS with light analysis during the BRAC period in the end.
+#### 2. Visualizations: Visualizes per MSA BRAC 2005 Closure and Realignment Impacts data by year, and produce spatial visualizations, outputs to 'ImagesOutput' folder
 
+### Output Images ('ImagesOutput' folder)
+#### 1. plot1: Line plot that shows the average unemplotment rate by BRAC direct changes over time in 2005
+#### 2. plot2: Spatial map taht plots non-zero direct effects of BRAC, by continental USA MSA
+#### 3. plot3_allstates: Spatial map that plots non-zero direct effects of BRAC, by continental and territory USA MSA
+ 
 ### Miscellaneous
 #### .gitignore file excludes all shapefile folders and any zip files from being committed to the repo.
 
