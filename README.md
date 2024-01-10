@@ -1,20 +1,19 @@
-# msa-brac-employment-spatial
 # Exploring Metropolitan Statistical Areas and Employment, with Spatial Visualizations, Shiny App Web Page Example
 To read more about what an MSA is, see [this link](https://www.census.gov/programs-surveys/metro-micro/about.html) to the US Census Bureau. 
 
 # Files
 
-### - Data Sources and Descriptions ('data' folder)
-#### 1. ssamatab.xlsx: Monthly statistics on the levels of the labor force, employment, and unemployment, along with the unemployment rate, for all MSAs in the US, from 1990 to 2023.
+### - Data Sources and Descriptions (`data` folder)
+#### 1. `ssamatab.xlsx`: Monthly statistics on the levels of the labor force, employment, and unemployment, along with the unemployment rate, for all MSAs in the US, from 1990 to 2023.
 Bureau of Labor and Statistics (BLS) website: https://www.bls.gov/lau/metrossa.htm. At the bottom under "Downloadable Data Files" select the ZIP version of Table 1. The extracted file is named ssamatab.xlsx by default.
-#### 2. geocorr2018_2327800015.csv: County-MSAs linkage file for crosswalk.
+#### 2. 'geocorr2018_2327800015.csv': County-MSAs linkage file for crosswalk.
 Missouri Census Data Center Geographic Correspondence Engine (MABLE Geocorr) at: https://mcdc.missouri.edu/applications/geocorr2018.html. 
   * In the top window select all US states by holding shift and clicking at the bottom
   * In the left window select "County"
   * In the right window select "Core Based Statistical Area (CBSA)"
   * Leave all other selections at their defaults and click "Run request"
   * Save the CSV document generated at the bottom of the next page, that begins with "geocorr2018_"
-#### 3. Table.csv: Annual county employment levels for three years, split by total jobs, manufacturing jobs, and military jobs.
+#### 3. 'Table.csv': Annual county employment levels for three years, split by total jobs, manufacturing jobs, and military jobs.
 To begin, go to the following Bureau of Economic Analysis (BEA) website: https://www.bea.gov/itable/regional-gdp-and-personal-income. Click on:
   * "Interactive Data Tables" (orange bar)
   * "Personal income and employment by county and metropolitan area"
@@ -25,8 +24,8 @@ To begin, go to the following Bureau of Economic Analysis (BEA) website: https:/
   * In the "Statistic" window, select "Total employment (number of jobs)", "Manufacturing", and "Military" (hold ctrl to select multiple items)
   * Select the years 2005, 2006, and 2007
   * Click "Download" and select "CSV". The resulting file will be named Table.csv
-#### 4. hw2_data.csv: BRAC 2005 Closure and Realignment Impacts by Economic Area, cleaned.
-#### 5. MSA and State Shapefile Unzipped Files  ('cb_2018_us_state_5m' and 'tl_2019_us_cbsa' folders):
+#### 4. `hw2_data.csv`: BRAC 2005 Closure and Realignment Impacts by Economic Area, cleaned.
+#### 5. MSA and State Shapefile Unzipped Files  (`cb_2018_us_state_5m` and `tl_2019_us_cbsa` folders):
 MSA zip shapefile directly from: https://www2.census.gov/geo/tiger/TIGER2019/CBSA/tl_2019_us_cbsa.zip,
 and the state zip shapefiles directly from: https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_5m.zip
 
@@ -34,23 +33,23 @@ and the state zip shapefiles directly from: https://www2.census.gov/geo/tiger/GE
 #### 1. Data Manipulation: Clean and merge county-level BEA data and MSA-level BLS with light analysis during the BRAC period in the end.
 #### 2. Visualizations: Visualizes per MSA BRAC 2005 Closure and Realignment Impacts data by year, and produce spatial visualizations, outputs to 'ImagesOutput' folder
 
-### - Output Images ('ImagesOutput' folder)
+### - Output Images (`ImagesOutput` folder)
 #### 1. plot1: Line plot that shows the average unemplotment rate by BRAC direct changes over time in 2005
-#### 2. plot2: Spatial map taht plots non-zero direct effects of BRAC, by continental USA MSA
+#### 2. plot2: Spatial map that plots non-zero direct effects of BRAC, by continental USA MSA
 #### 3. plot3_allstates: Spatial map that plots non-zero direct effects of BRAC, by continental and territory USA MSA
  
 ### - Miscellaneous
-#### .gitignore file excludes all shapefile folders and any zip files from being committed to the repo.
+#### `.gitignore` file excludes all shapefile folders and any zip files from being committed to the repo.
 
 
 # Project Description and Step-by-step Instructions
 ## 1. Follow 'Data Sources and Descriptions' to download the latest dataset
 
 ## 2. Preparing the county-level BEA data
-The file Table.csv shows annual county employment levels for three years, split by total jobs, manufacturing jobs, and military jobs. Load it in as a dataframe, cleaning it up and reshaping it to long (tidy) format. In this format, each row should be uniquely identified by a place and a time. The end result has five columns (county, year, manufacturing, military, total).
+The file `Table.csv` shows annual county employment levels for three years, split by total jobs, manufacturing jobs, and military jobs. Load it in as a dataframe, cleaning it up and reshaping it to long (tidy) format. In this format, each row should be uniquely identified by a place and a time. The end result has five columns (county, year, manufacturing, military, total).
 
 ## 3. Preparing the MSA-level BLS data
-The file ssamatab.xlsx has the monthly statistics on the levels of the labor force, employment, and unemployment, along with the unemployment rate, for all MSAs in the US, from 1990 to 2023. Load it in as a dataframe and perform any necessary cleaning. The final result has only four columns (area, year, month, unemployment rate).
+The file `ssamatab.xlsx` has the monthly statistics on the levels of the labor force, employment, and unemployment, along with the unemployment rate, for all MSAs in the US, from 1990 to 2023. Load it in as a dataframe and perform any necessary cleaning. The final result has only four columns (area, year, month, unemployment rate).
 
 ## 4. Preparing the county-MSA crosswalk
 Our goal is to connect the unemployment rate data from the BLS file to the industry-level data from the BEA file, but we have a (fairly common) problem: these datasets are currently mis-matched by the level of geographic resolution. We cannot directly merge counties into MSAs with our current tools. The solution is called a "crosswalk" - a third dataset that does nothing but connect the matching key in each of the other datasets. Fortunately, MSAs are made up of entire counties, so we can easily find the connecting data we need using MABLE Geocorr. Load the crosswalk (the file named begginning with geocorr2018_) into a third dataframe, dropping all counties that aren't part of an MSA (denoted by 99999 in the cbsaname10 column). The final dataframe has only two columns (the counties and the MSAs).
@@ -66,7 +65,7 @@ Using these three dataframes, combine them into one long "tidy" dataframe where 
 
 ## 7. Data Visualization
 ## Part 1: Line Plot
-__1a)__ Using BLS data (ssamatab1.xlsx), modify the code to work here and to keep the "Area FIPS Code" column. Then, filter the data so only observations for 2005 remain, and create a column of datetime objects.
+__1a)__ Using BLS data (`ssamatab1.xlsx`), modify the code to work here and to keep the "Area FIPS Code" column. Then, filter the data so only observations for 2005 remain, and create a column of datetime objects.
 
 __1b)__ Load the final csv document of BRAC 2005 Closure and Realignment Impacts by Economic Area. Merge this data with the data created in 1a using the FIPS codes, so each row is unique by MSA, and one new column - 'direct' has been added to the four from the first part. Discard the other columns from the BRAC table (the direct column sums all of the other impact columns into one value).
 
@@ -84,7 +83,7 @@ Our goal now is to create a spatial mapping show the direct affects of BRAC in t
 
 https://www2.census.gov/geo/tiger/TIGER2019/CBSA/tl_2019_us_cbsa.zip
 
-And the state State shapefiles directly from this link:
+And the State shapefiles directly from this link:
 
 https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_5m.zip
 
@@ -108,4 +107,4 @@ We will then creat a figure using the above data inside an interactive Shiny app
     - Add a UI element that lets the user select military share or the manufacturing share of employment, then automatically update the figure to show the quantiles (plus a zero group) for that measure.
 4. Add any appropriate titles, labels, and formatting to your figure.
 
-Finally, a screen shot of our Shiny app running in the web browser is attached in the 'ShinyApp' folder, named 'web_page.png'.
+Finally, a screen shot of our Shiny app running in the web browser is attached in the `ShinyApp` folder, named `web_page.png`.
